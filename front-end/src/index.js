@@ -31,6 +31,24 @@ const shuffleWord = (word) => {
   return shuffledWord;
 };
 
+// const listenForSubmit = () => {
+//   form.addEventListener("submit", (e) => {
+// e.preventDefault();
+// getFormValue();
+// compareWord();
+// })
+// }
+const getFormValue = () => {
+  return userGuess.value;
+};
+const compareWord = (word, userGuess) => {
+  if (word == userGuess) {
+    console.log("Wahoo!");
+  } else {
+    console.log("SORRY ");
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   displayWords();
 });
