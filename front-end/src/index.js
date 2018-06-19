@@ -1,4 +1,5 @@
 const url = "http://localhost:3000/words";
+const wordSection = document.getElementById("word-section");
 
 const getWords = () => {
   return fetch(url).then((res) => res.json());
@@ -6,7 +7,20 @@ const getWords = () => {
 };
 
 const displayWords = () => {
-  getWords().then((json) => console.log(json));
+  getWords().then((words) =>
+    words.forEach((word) => {
+      appendWord(word);
+    })
+  );
+};
+
+const appendWord = (word) => {
+  wordSection.innerHTML += wordToString(word);
+};
+
+const wordToString = (word) => {
+  console.log(word);
+  return `<h2>${word.name}<h2>`;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
