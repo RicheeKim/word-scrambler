@@ -7,11 +7,10 @@ const getWords = () => {
 };
 
 const displayWords = () => {
-  getWords().then((words) =>
-    words.forEach((word) => {
-      appendWord(word);
-    })
-  );
+  getWords().then((words) => {
+    let word = words[Math.floor(Math.random() * words.length)];
+    appendWord(word);
+  });
 };
 
 const appendWord = (word) => {
