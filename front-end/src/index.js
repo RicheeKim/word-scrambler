@@ -8,8 +8,8 @@ const getWords = () => {
 
 const displayWords = () => {
   getWords().then((words) => {
-    let word = words[Math.floor(Math.random() * words.length)];
-    appendWord(word);
+    let word = words[Math.floor(Math.random() * words.length)].name;
+    appendWord(shuffleWord(word));
   });
 };
 
@@ -19,7 +19,16 @@ const appendWord = (word) => {
 
 const wordToString = (word) => {
   console.log(word);
-  return `<h2>${word.name}<h2>`;
+  return `<h2>${word}<h2>`;
+};
+
+const shuffleWord = (word) => {
+  var shuffledWord = "";
+  let newWord = word.split("");
+  while (newWord.length > 0) {
+    shuffledWord += newWord.splice((newWord.length * Math.random()) << 0, 1);
+  }
+  return shuffledWord;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
