@@ -1,7 +1,12 @@
 const url = "http://localhost:3000/words";
+// const userUrl = "http://localhost:3000/users/:id";
+// const userScoreUrl = "http://localhost:3000/users/:id/scores";
+
 const wordSection = document.getElementById("word-section");
 const userGuess = document.getElementById("user-guess");
 const form = document.getElementById("guess-form");
+const answerMessage = document.getElementById("answer-message");
+const yourScore = document.getElementById("your-score");
 var word;
 
 const getWords = () => {
@@ -51,11 +56,50 @@ const getFormValue = () => {
 
 const compareWord = (chosenWord, userGuess) => {
   if (chosenWord == userGuess) {
-    alert("Wahoo!");
+    displayCorrectMessage();
+    displayScore();
+    stopScore();
   } else {
-    console.log("SORRY");
+    displayWrongMessage();
   }
 };
+
+const displayCorrectMessage = () => {
+  answerMessage.innerHTML = "Correct!";
+};
+
+const displayWrongMessage = () => {
+  answerMessage.innerHTML = "Sorry! Try Again";
+};
+
+var scoreLeft = 2000;
+var counter = document.getElementById("counter");
+const countdown = () => {
+  if (scoreLeft == -1) {
+    clearTimeout(timerId);
+  } else {
+    counter.innerHTML = "Score: " + scoreLeft;
+    scoreLeft -= 1;
+  }
+};
+
+var timerId = setInterval(countdown, 10);
+
+const displayScore = () => {
+  yourScore.innerHTML = "Your Score: " + parseInt(scoreLeft);
+};
+
+const stopScore = () => {
+  clearInterval(timerId);
+};
+
+// const postScore = (score) => {
+//   fetch(userScoreUrl, {
+//     method: "POST",
+//     body: JSON.stringify(score),
+//     headers: { "content-type": "application/json" }
+//   });
+// };
 
 document.addEventListener("DOMContentLoaded", () => {
   displayWords();
