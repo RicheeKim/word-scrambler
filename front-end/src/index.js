@@ -51,7 +51,7 @@ const getFormValue = () => {
 
 const compareWord = (chosenWord, userGuess) => {
   if (chosenWord == userGuess) {
-    console.log("Wahoo!");
+    alert("Wahoo!");
   } else {
     console.log("SORRY");
   }
