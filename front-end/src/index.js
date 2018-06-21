@@ -13,30 +13,30 @@ var wordButton;
 var timerId;
 var word;
 
-const createStartButton = () => {
-  startButton = document.createElement("button");
-  startButton.id = "start-button";
-  startButton.innerHTML = "Start Game!";
-  startSection.appendChild(startButton);
-};
-
-const startGame = () => {
-  startButton.addEventListener("click", startingGame);
-};
-
-const startingGame = () => {
-  displayWords();
-  timerId = setInterval(countdown, 10);
-  removeStartButton();
-  createWordButton();
-  getNewWord();
-};
-
-const removeStartButton = () => {
-  startButton.parentNode.removeChild(startButton);
-  return false;
-};
-
+// const createStartButton = () => {
+//   startButton = document.createElement("button");
+//   startButton.id = "start-button";
+//   startButton.innerHTML = "Start Game!";
+//   startSection.appendChild(startButton);
+// };
+//
+// const startGame = () => {
+//   startButton.addEventListener("click", startingGame);
+// };
+//
+// const startingGame = () => {
+//   displayWords();
+//   timerId = setInterval(countdown, 10);
+//   removeStartButton();
+//   createWordButton();
+//   getNewWord();
+// };
+//
+// const removeStartButton = () => {
+//   startButton.parentNode.removeChild(startButton);
+//   return false;
+// };
+//
 const createWordButton = () => {
   wordButton = document.createElement("button");
   wordButton.id = "word-button";
@@ -46,10 +46,10 @@ const createWordButton = () => {
 
 const getNewWord = () => {
   wordButton.addEventListener("click", () => {
-    // window.location.reload();
-    removeWord();
-    startingGame();
-    compareWord();
+    window.location.reload();
+    // removeWord();
+    // startingGame();
+    // compareWord();
   });
 };
 
@@ -78,11 +78,11 @@ const wordToString = (word) => {
   return `<h2 id="word">${word}<h2>`;
 };
 
-const removeWord = () => {
-  let word = document.getElementById("word");
-  word.parentNode.removeChild(word);
-  return false;
-};
+// const removeWord = () => {
+//   let word = document.getElementById("word");
+//   word.parentNode.removeChild(word);
+//   return false;
+// };
 
 const shuffleWord = (word) => {
   var shuffledWord = "";
@@ -134,7 +134,7 @@ const countdown = () => {
   }
 };
 
-// var timerId = setInterval(countdown, 10);
+var timerId = setInterval(countdown, 10);
 
 const displayScore = () => {
   yourScore.innerHTML = "Your Score: " + (parseInt(scoreLeft) + 1);
@@ -153,7 +153,11 @@ const stopScore = () => {
 // };
 
 document.addEventListener("DOMContentLoaded", () => {
-  createStartButton();
-  startGame();
+  // createStartButton();
+  // timerId = setInterval(countdown, 10);
+  displayWords();
+  createWordButton();
+  // startGame();
+  getNewWord();
   listenForSubmit();
 });
