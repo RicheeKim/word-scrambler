@@ -7,7 +7,51 @@ const userGuess = document.getElementById("user-guess");
 const form = document.getElementById("guess-form");
 const answerMessage = document.getElementById("answer-message");
 const yourScore = document.getElementById("your-score");
+const startSection = document.getElementById("start");
+var startButton;
+var wordButton;
+var timerId;
 var word;
+
+const createStartButton = () => {
+  startButton = document.createElement("button");
+  startButton.id = "start-button";
+  startButton.innerHTML = "Start Game!";
+  startSection.appendChild(startButton);
+};
+
+const startGame = () => {
+  startButton.addEventListener("click", startingGame);
+};
+
+const startingGame = () => {
+  displayWords();
+  timerId = setInterval(countdown, 10);
+  removeStartButton();
+  createWordButton();
+  getNewWord();
+};
+
+const removeStartButton = () => {
+  startButton.parentNode.removeChild(startButton);
+  return false;
+};
+
+const createWordButton = () => {
+  wordButton = document.createElement("button");
+  wordButton.id = "word-button";
+  wordButton.innerHTML = "New Word!";
+  startSection.appendChild(wordButton);
+};
+
+const getNewWord = () => {
+  wordButton.addEventListener("click", () => {
+    // window.location.reload();
+    removeWord();
+    startingGame();
+    compareWord();
+  });
+};
 
 const getWords = () => {
   return fetch(url)
@@ -31,7 +75,13 @@ const appendWord = (word) => {
 
 const wordToString = (word) => {
   console.log(word);
-  return `<h2>${word}<h2>`;
+  return `<h2 id="word">${word}<h2>`;
+};
+
+const removeWord = () => {
+  let word = document.getElementById("word");
+  word.parentNode.removeChild(word);
+  return false;
 };
 
 const shuffleWord = (word) => {
@@ -47,6 +97,7 @@ const listenForSubmit = () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     compareWord(word, getFormValue());
+    userGuess.value = "";
   });
 };
 
@@ -72,7 +123,7 @@ const displayWrongMessage = () => {
   answerMessage.innerHTML = "Sorry! Try Again";
 };
 
-var scoreLeft = 2000;
+var scoreLeft = 5000;
 var counter = document.getElementById("counter");
 const countdown = () => {
   if (scoreLeft == -1) {
@@ -83,10 +134,10 @@ const countdown = () => {
   }
 };
 
-var timerId = setInterval(countdown, 10);
+// var timerId = setInterval(countdown, 10);
 
 const displayScore = () => {
-  yourScore.innerHTML = "Your Score: " + parseInt(scoreLeft);
+  yourScore.innerHTML = "Your Score: " + (parseInt(scoreLeft) + 1);
 };
 
 const stopScore = () => {
@@ -102,6 +153,7 @@ const stopScore = () => {
 // };
 
 document.addEventListener("DOMContentLoaded", () => {
-  displayWords();
+  createStartButton();
+  startGame();
   listenForSubmit();
 });
