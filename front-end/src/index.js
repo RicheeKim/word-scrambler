@@ -97,7 +97,6 @@ const listenForSubmit = () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     compareWord(word, getFormValue());
-    userGuess.value = "";
   });
 };
 
@@ -123,7 +122,7 @@ const displayWrongMessage = () => {
   answerMessage.innerHTML = "Sorry! Try Again";
 };
 
-var scoreLeft = 5000;
+var scoreLeft = 2500;
 var counter = document.getElementById("counter");
 const countdown = () => {
   if (scoreLeft == -1) {
